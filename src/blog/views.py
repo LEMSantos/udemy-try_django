@@ -6,7 +6,23 @@ from django.shortcuts import render, get_object_or_404
 from .models import BlogPost
 
 
-def blog_post_detail_page(request, slug):
+def blog_post_list_view(request):
+    queryset = BlogPost.objects.all()
+
+    template_name = 'blog_post_list.html'
+    context = {'blog_post_list': queryset}
+
+    return render(request, template_name, context)
+
+
+def blog_post_create_view(request):
+    template_name = 'blog_post_create.html'
+    context = {'form': None}
+
+    return render(request, template_name, context)
+
+
+def blog_post_detail_view(request, slug):
     queryset = BlogPost.objects.filter(slug=slug)
 
     if queryset.count() == 0:
@@ -15,6 +31,34 @@ def blog_post_detail_page(request, slug):
     blog_post = queryset.first()
 
     template_name = 'blog_post_detail.html'
+    context = {'blog_post': blog_post}
+
+    return render(request, template_name, context)
+
+
+def blog_post_update_view(request, slug):
+    queryset = BlogPost.objects.filter(slug=slug)
+
+    if queryset.count() == 0:
+        raise Http404
+
+    blog_post = queryset.first()
+
+    template_name = 'blog_post_update.html'
+    context = {'blog_post': blog_post, 'form': None}
+
+    return render(request, template_name, context)
+
+
+def blog_post_delete_view(request):
+    queryset = BlogPost.objects.filter(slug=slug)
+
+    if queryset.count() == 0:
+        raise Http404
+
+    blog_post = queryset.first()
+
+    template_name = 'blog_post_delete.html'
     context = {'blog_post': blog_post}
 
     return render(request, template_name, context)
