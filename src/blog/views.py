@@ -1,6 +1,6 @@
-from django.db.models import query
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 
 # Create your views here.
 from .forms import BlogPostModelForm
@@ -16,6 +16,7 @@ def blog_post_list_view(request):
     return render(request, template_name, context)
 
 
+@staff_member_required
 def blog_post_create_view(request):
     form = BlogPostModelForm(request.POST or None)
 
