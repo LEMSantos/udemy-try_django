@@ -54,9 +54,16 @@ def blog_post_update_view(request, slug):
         raise Http404
 
     blog_post = queryset.first()
+    form = BlogPostModelForm(request.POST or None, instance=blog_post)
 
-    template_name = 'blog/update.html'
-    context = {'blog_post': blog_post, 'form': None}
+    if form.is_valid():
+        form.save()
+
+    template_name = 'form.html'
+    context = {
+        'form': form,
+        'title': f'Update {blog_post.title}',
+    }
 
     return render(request, template_name, context)
 
