@@ -22,6 +22,7 @@ def blog_post_create_view(request):
 
     if form.is_valid():
         blog_post = form.save(commit=False)
+        blog_post.user = request.user
         blog_post.save()
 
         form = BlogPostModelForm()
