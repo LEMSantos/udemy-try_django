@@ -5,4 +5,11 @@
 <h1>{{ blog_post.title }}</h1>
 <p>{{ blog_post.content }}</p>
 
+{% if request.user.is_authenticated %}
+{% if request.user.is_authenticated %}
+<a href="{{ blog_post.get_edit_url }}">Edit</a>
+<a href="{{ blog_post.get_delete_url }}">Delete</a>
+{% endif %}
+{% endif %}
+
 {% endblock %}
