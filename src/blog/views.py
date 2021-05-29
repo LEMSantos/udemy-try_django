@@ -1,6 +1,6 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from .forms import BlogPostModelForm
@@ -77,6 +77,10 @@ def blog_post_delete_view(request, slug):
         raise Http404
 
     blog_post = queryset.first()
+
+    if request.method == 'POST':
+        blog_post.delete()
+        return redirect('/blog')
 
     template_name = 'blog/delete.html'
     context = {'blog_post': blog_post}
