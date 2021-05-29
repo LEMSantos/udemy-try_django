@@ -2,12 +2,10 @@
 
 {% block content %}
 
-{% for blog_post in blog_post_list %}
-<ul>
-    <li>
-        <a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a>
-    </li>
-</ul>
-{% endfor %}
+<div class="row">
+    {% for blog_post in blog_post_list %}
+    {% include 'blog/list-inline.html' with blog_post=blog_post %}
+    {% endfor %}
+</div>
 
 {% endblock %}
