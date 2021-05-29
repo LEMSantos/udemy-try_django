@@ -47,6 +47,7 @@ def blog_post_detail_view(request, slug):
     return render(request, template_name, context)
 
 
+@staff_member_required
 def blog_post_update_view(request, slug):
     queryset = BlogPost.objects.filter(slug=slug)
 
@@ -61,14 +62,15 @@ def blog_post_update_view(request, slug):
 
     template_name = 'form.html'
     context = {
-        'form': form,
         'title': f'Update {blog_post.title}',
+        'form': form,
     }
 
     return render(request, template_name, context)
 
 
-def blog_post_delete_view(request):
+@staff_member_required
+def blog_post_delete_view(request, slug):
     queryset = BlogPost.objects.filter(slug=slug)
 
     if queryset.count() == 0:
