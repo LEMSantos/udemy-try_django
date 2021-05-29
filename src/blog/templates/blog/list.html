@@ -4,7 +4,9 @@
 
 {% for blog_post in blog_post_list %}
 <ul>
-    <li>{{ blog_post.title }} -- {{blog_post.slug}}</li>
+    <li>
+        <a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a>
+    </li>
 </ul>
 {% endfor %}
 
