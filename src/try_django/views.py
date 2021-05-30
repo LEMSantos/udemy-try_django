@@ -3,11 +3,15 @@ from django.shortcuts import render
 from django.template.loader import get_template
 
 from .forms import ContactForm
+from blog.models import BlogPost
 
 
 def home_page(request):
-    my_title = 'Hello there...'
-    return render(request, 'hello_world.html', {'title': my_title})
+    my_title = 'Wellcome to Try Django'
+    queryset = BlogPost.objects.all()[:5]
+    context = {'title': my_title, 'blog_list': queryset}
+
+    return render(request, 'home.html', context)
 
 
 def about_page(request):
@@ -21,10 +25,7 @@ def contact_page(request):
         print(form.cleaned_data)
         form = ContactForm()
 
-    context = {
-        'title': 'Contact us',
-        'form': form
-    }
+    context = {'title': 'Contact us', 'form': form}
 
     return render(request, 'form.html', context)
 
