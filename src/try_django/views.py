@@ -8,7 +8,7 @@ from blog.models import BlogPost
 
 def home_page(request):
     my_title = 'Wellcome to Try Django'
-    queryset = BlogPost.objects.all()[:5]
+    queryset = BlogPost.objects.published()[:5]
     context = {'title': my_title, 'blog_list': queryset}
 
     return render(request, 'home.html', context)
