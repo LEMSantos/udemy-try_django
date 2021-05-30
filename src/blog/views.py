@@ -8,7 +8,11 @@ from .models import BlogPost
 
 
 def blog_post_list_view(request):
-    queryset = BlogPost.objects.all()
+    queryset = BlogPost.objects.all().published()
+
+    if request.user.is_authenticated:
+        _queryset = BlogPost.objects.filter(user=request.user)
+        queryset = (queryset | _queryset).distinct()
 
     template_name = 'blog/list.html'
     context = {'blog_post_list': queryset}
