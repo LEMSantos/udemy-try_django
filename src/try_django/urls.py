@@ -17,6 +17,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 
+from searches.views import search_view
 from blog.views import (
     blog_post_create_view,
 )
@@ -26,6 +27,7 @@ urlpatterns = [
     path('', home_page),
     path('blog-new/', blog_post_create_view),
     path('blog/', include('blog.urls')),
+    path('search/', search_view),
     path('about/', about_page),
     path('contact/', contact_page),
     path('example/', example_page),
