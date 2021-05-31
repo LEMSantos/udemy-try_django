@@ -1,5 +1,5 @@
 <div class="col-12 col-md-10 mb-3 mx-auto">
-    <div class="card {% if not blog_post.publish_date %} border border-warning {% endif %}">
+    <div class="card border {% if not blog_post.publish_date %} border-warning {% else %} border-dark {% endif %}">
         <div class="card-body">
             {% if blog_post.image %}
             <a href="{{ blog_post.get_absolute_url }}">
